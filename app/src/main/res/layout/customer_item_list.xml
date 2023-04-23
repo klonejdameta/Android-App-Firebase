@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/my_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:icon="@drawable/baseline_arrow_back_24"
+        app:iconGravity="textStart"
+        app:iconPadding="8dp"
+        android:onClick="customersBackButton" />
+
+    <TextView
+        android:textColor="#000"
+        android:id="@+id/text_id"
+        android:layout_margin="10dp"
+        android:textSize="18sp"
+        android:text="@string/id"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:id="@+id/firstName"
+        android:text="@string/first_name"
+        android:layout_margin="5dp"
+        android:textSize="18sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:id="@+id/lastName"
+        android:text="@string/last_name"
+        android:layout_margin="5dp"
+        android:textSize="18sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:id="@+id/birthDate"
+        android:text="@string/birth_date"
+        android:layout_margin="5dp"
+        android:textSize="18sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:id="@+id/address"
+        android:text="@string/address"
+        android:layout_margin="5dp"
+        android:textSize="18sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:id="@+id/longitude"
+        android:text="@string/longitude"
+        android:layout_margin="5dp"
+        android:textSize="18sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:id="@+id/latitude"
+        android:text="@string/latitude"
+        android:layout_margin="5dp"
+        android:textSize="18sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <EditText
+        android:textColor="#000"
+        android:textStyle="bold"
+        android:id="@+id/isActive"
+        android:text="@string/is_active"
+        android:layout_margin="5dp"
+        android:textSize="18sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_margin="5dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:background="#0288D1"
+            android:id="@+id/button_edit"
+            android:layout_weight="2"
+            android:text="@string/edit_customer"
+            android:layout_margin="2dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:layout_margin="2dp"
+            android:background="#D32F2F"
+            android:id="@+id/button_delete"
+            android:layout_weight="2"
+            android:text="@string/delete_customer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <View
+        android:layout_margin="5dp"
+        android:background="#C5C5C5"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+</LinearLayout>

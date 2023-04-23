@@ -1,0 +1,59 @@
+This project consists of building a simple mobile application with the functionalities described below:
+
+Login is the main page that opens when we run the application, it has two fields to enter the email and password for registered users.
+If the user has not previously registered in the application, at the bottom of the login page there is a button that redirects the user to the signup page.
+To log in, several validations have been performed as follows:
+- Check if email address exist, if not we show a message to the user that email does not exist, you need to sign up.
+- All fields are mandatory to be filled.
+- Check if the email and password entered are correct with the one stored in the database.
+- If the data entered by the user is correct, the login is completed successfully and a message is displayed to the user that the login was completed successfully
+  and we direct him to the home page.
+
+Signup, user must register to be able to navigate in our app.
+Signup has this fields: Name, Username, Email, Birthdate, Password, Retype Password.
+The validations performed for the fields are:
+- All fields are mandatory to be filled.
+- Email must be e valid email.
+- Birthdate must be a valid date format.
+- Password must complete this restrictions: to be eight or more characters long, to have uppercase letters, to have special characters and numbers.
+- Retyped password must match the password entered before by user.
+- Password is stored  in a hashed form in database.
+  A message is shown to the user for each case if some of the fileds are not filled correctly.
+  After successfully registered, the user is redirected to the login page.
+
+After login successfully the user can navigate in the app.
+Navigation bar has these features: Home button, Customers button, Documents button and Map button.
+When we click these buttons a page is opened for each one.
+
+- At Home page is shown a message: Welcome<username> the username is the username of the currently loged user, and a button View Users.
+  View Users button opens a page with all user data, also we provide to buttons Edit to edit the user data and Delete to delete the user data and a Back button
+  which redirects the user at View Users page.
+
+- At the Customer page are these fields that user must complete te enter a customer: First Name, Last Name, Birth Date, Address, Latitude and Longitude.
+    - All fields are mandatory to complete.
+    - Birth Date must be a valid date format.
+    - Latitude and Longitude must be a valid value.
+      In case of errors a  message is shown for each case.
+      When fields are completed successfully the user can click the Add Customer button to store the customer in database, a successfully message is shown.
+      When we click the View Customer button a page with all user data is opened. In this page are two other buttons Edit Customer and Delete Customer
+      to edit and delete the customers and a Back button if user wants to go back.
+
+- At the Documents page are these fields that user must complete to store a document: Document Number, Document Date, Amount, Customer.
+    - All fields are mandatory to complete.
+    - Document Number must be a number type due to validations that are made, it does not allow other values.
+    -  Document Date must be a valid date format.
+    - Amount must be a number.
+    - Customer must be a text.
+      In case of errors a  message is shown for each case.
+      When fields are completed successfully the user can click the Add Document button to store the document in database, a successfully message is shown.
+      The View Documents button opens a page with all documents data stored in  database, in these page are also two  other buttons Edit Document and Delete Document
+      to edit and delete the documents and a Back button if user wants to go back.
+
+- At Map page is shown the current location of user in the map, depends on Latitude and Longitude values.
+  Map is implemented using API KEY.
+
+- Logout button
+  If the user logs out, he is redirected to the login page.
+
+Technologies used are: Android Studio, SQLite.
+The code is written in Java.

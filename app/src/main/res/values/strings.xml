@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">LogicalApp</string>
+    <string name="open_nav">Open Navigation Drawer</string>
+    <string name="close_nav">Close Navigation Drawer</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="test_user">Test User</string>
+    <string name="settings">Settings</string>
+    <string name="logout">Logout</string>
+    <string name="first_name">First Name</string>
+    <string name="id">Id</string>
+    <string name="last_name">Last Name</string>
+    <string name="birth_date">Birth Date</string>
+    <string name="address">Address</string>
+    <string name="longitude">Longitude</string>
+    <string name="latitude">Latitude</string>
+    <string name="is_active">Is Active</string>
+    <string name="edit_customer">Edit Customer</string>
+    <string name="delete_customer">Delete Customer</string>
+    <string name="title_activity_maps">MapsActivity</string>
+
+</resources>

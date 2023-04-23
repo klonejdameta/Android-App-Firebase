@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "488129418273",
+    "project_id": "logicalapp-df74e",
+    "storage_bucket": "logicalapp-df74e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:488129418273:android:bf5bf11be86839ee743f60",
+        "android_client_info": {
+          "package_name": "com.kmeta.logicalapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "488129418273-l71u9cr4vhslnmn7qq9hetotqp4snjf3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAucOOzrxnMJBPmcX9EYaY_hsRjE_plJJ8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "488129418273-l71u9cr4vhslnmn7qq9hetotqp4snjf3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
