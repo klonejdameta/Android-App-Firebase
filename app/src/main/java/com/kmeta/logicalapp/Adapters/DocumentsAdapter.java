@@ -45,7 +45,7 @@ public class DocumentsAdapter extends RecyclerView.Adapter<DocumentsAdapter.View
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         final DocumentsModel documentsModelClass = documentsModels.get(position);
 
-        holder.textViewID.setText(Integer.toString(documentsModelClass.getId()));
+        holder.textViewID.setText(documentsModelClass.getId());
         holder.document_number.setText(documentsModelClass.getDocumentNumber());
         holder.document_date.setText(documentsModelClass.getDocumentDate());
         holder.amount.setText(documentsModelClass.getAmount());

@@ -12,6 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.kmeta.logicalapp.MainActivity;
 import com.kmeta.logicalapp.Models.CustomerModel;
 import com.kmeta.logicalapp.Database.DatabaseConnector;
 import com.kmeta.logicalapp.Activities.ViewCustomersActivity;
@@ -28,7 +31,7 @@ public class CustomersFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private String mParam1;
     private String mParam2;
-    DatabaseConnector databaseConnector;
+    CollectionReference customersRef;
 
     public CustomersFragment() {
 
@@ -56,7 +59,7 @@ public class CustomersFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentCustomersBinding.inflate(inflater, container, false);
-        databaseConnector = new DatabaseConnector(getContext());
+        customersRef = FirebaseFirestore.getInstance().collection("customers");
         binding.buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,6 +135,7 @@ public class CustomersFragment extends Fragment {
                     Toast.makeText(getActivity(), "Invalid latitude value", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                String isActive = "true";
 
                 if (TextUtils.isEmpty(stringFirstName) ||
                         TextUtils.isEmpty(stringLastName) ||
@@ -141,21 +145,12 @@ public class CustomersFragment extends Fragment {
                         TextUtils.isEmpty(stringLatitude)) {
                     Toast.makeText(getActivity(), "All fields are mandatory", Toast.LENGTH_SHORT).show();
                 } else {
-                    CustomerModel customerModel = new CustomerModel(stringFirstName, stringLastName,
-                            stringBirthDate, stringAddress, stringLongitude, stringLatitude);
-/*
-                    databaseConnector.addCustomer(customerModel);
-*/
-                    Toast.makeText(getActivity(), "Add Customer Successfully", Toast.LENGTH_SHORT).show();
-                    binding.firstName.setText("");
-                    binding.lastName.setText("");
-                    binding.birthDate.setText("");
-                    binding.address.setText("");
-                    binding.longitude.setText("");
-                    binding.latitude.setText("");
-
-                    getActivity().getSupportFragmentManager().beginTransaction()
-                            .detach(CustomersFragment.this).attach(CustomersFragment.this).commit();
+                    String customerId = customersRef.document().getId();
+                    CustomerModel customer = new CustomerModel(customerId, stringFirstName, stringLastName, stringBirthDate, stringAddress, stringLongitude, stringLatitude, isActive);
+                    customersRef.document(customerId).set(customer);
+                    Toast.makeText(getContext(), "Customer Created Successfully!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getContext(), MainActivity.class);
+                    startActivity(intent);
                 }
             }
         });

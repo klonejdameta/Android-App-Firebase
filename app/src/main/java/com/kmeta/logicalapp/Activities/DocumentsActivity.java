@@ -8,8 +8,11 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.kmeta.logicalapp.Database.DatabaseConnector;
 import com.kmeta.logicalapp.MainActivity;
+import com.kmeta.logicalapp.Models.DocumentsModel;
 import com.kmeta.logicalapp.databinding.ActivityDocumentsBinding;
 
 import java.text.ParseException;
@@ -18,7 +21,7 @@ import java.util.Date;
 import java.util.Locale;
 
 public class DocumentsActivity extends AppCompatActivity {
-    DatabaseConnector databaseConnector;
+    CollectionReference documentsRef;
     ActivityDocumentsBinding binding;
 
     @Override
@@ -26,7 +29,7 @@ public class DocumentsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityDocumentsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        databaseConnector = new DatabaseConnector(this);
+        documentsRef = FirebaseFirestore.getInstance().collection("documents");
         binding.documentCreateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,18 +78,12 @@ public class DocumentsActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (document_number.equals("") || document_date.equals("") || amount.equals("") || customer.equals("")) {
-                    Toast.makeText(DocumentsActivity.this, "All fields are mandatory", Toast.LENGTH_SHORT).show();
-                } else {
-/*                    Boolean insert = databaseConnector.insertDataDocuments(document_number, document_date, amount, customer);
-                    if (insert == true) {
-                        Toast.makeText(DocumentsActivity.this, "Document Created Successfully!", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(intent);
-                    } else {
-                        Toast.makeText(DocumentsActivity.this, "Document Creation Failed", Toast.LENGTH_SHORT).show();
-                    }*/
-                }
+                String documentId = documentsRef.document().getId();
+                DocumentsModel document = new DocumentsModel(documentId, document_number, document_date, amount, customer);
+                documentsRef.document(documentId).set(document);
+                Toast.makeText(DocumentsActivity.this, "Document Created Successfully!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
 
             }
         });

@@ -9,8 +9,11 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.kmeta.logicalapp.Database.DatabaseConnector;
 import com.kmeta.logicalapp.MainActivity;
+import com.kmeta.logicalapp.Models.CustomerModel;
 import com.kmeta.logicalapp.databinding.ActivityCustomersBinding;
 
 import java.text.ParseException;
@@ -20,7 +23,7 @@ import java.util.Locale;
 
 public class CustomersActivity extends AppCompatActivity {
 
-    DatabaseConnector databaseConnector;
+    CollectionReference customersRef;
     ActivityCustomersBinding binding;
 
     @Override
@@ -28,7 +31,7 @@ public class CustomersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityCustomersBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        databaseConnector = new DatabaseConnector(this);
+        customersRef = FirebaseFirestore.getInstance().collection("customers");
         binding.customerCreateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,6 +101,8 @@ public class CustomersActivity extends AppCompatActivity {
                     return;
                 }
 
+                String isActive = "true";
+
                 if (TextUtils.isEmpty(customerFirstName) ||
                         TextUtils.isEmpty(customerLastName) ||
                         TextUtils.isEmpty(customerBirthDate) ||
@@ -106,14 +111,12 @@ public class CustomersActivity extends AppCompatActivity {
                         TextUtils.isEmpty(customerLatitude)) {
                     Toast.makeText(CustomersActivity.this, "All fields are mandatory", Toast.LENGTH_SHORT).show();
                 } else {
-/*                    Boolean insert = databaseConnector.insertDataCustomers(customerFirstName, customerLastName, customerBirthDate, customerAddress, customerLongitude, customerLatitude);
-                    if (insert == true) {
-                        Toast.makeText(CustomersActivity.this, "Customer Created Successfully!", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(intent);
-                    } else {
-                        Toast.makeText(CustomersActivity.this, "Customer Creation Failed", Toast.LENGTH_SHORT).show();
-                    }*/
+                    String customerId = customersRef.document().getId();
+                    CustomerModel customer = new CustomerModel(customerId, customerFirstName, customerLastName, customerBirthDate, customerAddress, customerLongitude, customerLatitude, isActive);
+                    customersRef.document(customerId).set(customer);
+                    Toast.makeText(CustomersActivity.this, "Customer Created Successfully!", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
                 }
             }
         });

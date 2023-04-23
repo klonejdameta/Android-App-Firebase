@@ -1,13 +1,13 @@
 package com.kmeta.logicalapp.Models;
 
 public class DocumentsModel {
-    private Integer id;
+    private String id;
     private String documentNumber;
     private String documentDate;
     private String amount;
     private String customer;
 
-    public DocumentsModel(Integer id, String documentNumber, String documentDate, String amount, String customer) {
+    public DocumentsModel(String id, String documentNumber, String documentDate, String amount, String customer) {
         this.id = id;
         this.documentNumber = documentNumber;
         this.documentDate = documentDate;
@@ -22,7 +22,10 @@ public class DocumentsModel {
         this.customer = customer;
     }
 
-    public Integer getId() {
+    public DocumentsModel() {
+    }
+
+    public String getId() {
         return id;
     }
 
@@ -40,5 +43,25 @@ public class DocumentsModel {
 
     public String getCustomer() {
         return customer;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setDocumentNumber(String documentNumber) {
+        this.documentNumber = documentNumber;
+    }
+
+    public void setDocumentDate(String documentDate) {
+        this.documentDate = documentDate;
+    }
+
+    public void setAmount(String amount) {
+        this.amount = amount;
+    }
+
+    public void setCustomer(String customer) {
+        this.customer = customer;
     }
 }

@@ -11,7 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.kmeta.logicalapp.Database.DatabaseConnector;
+import com.kmeta.logicalapp.MainActivity;
 import com.kmeta.logicalapp.Models.DocumentsModel;
 import com.kmeta.logicalapp.Activities.ViewDocumentsActivity;
 import com.kmeta.logicalapp.databinding.FragmentDocumentsBinding;
@@ -27,7 +30,7 @@ public class DocumentsFragment extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private String mParam1;
     private String mParam2;
-    DatabaseConnector databaseConnector;
+    CollectionReference documentsRef;
 
     public DocumentsFragment() {
 
@@ -55,7 +58,7 @@ public class DocumentsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentDocumentsBinding.inflate(inflater, container, false);
-        databaseConnector = new DatabaseConnector(getContext());
+        documentsRef = FirebaseFirestore.getInstance().collection("documents");
         binding.buttonAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,23 +107,12 @@ public class DocumentsFragment extends Fragment {
                     return;
                 }
 
-                if (documentNumber.equals("") || documentDate.equals("") || amount.equals("") || customer.equals("")) {
-                    Toast.makeText(getActivity(), "All fields are mandatory", Toast.LENGTH_SHORT).show();
-                } else {
-                    DocumentsModel documentsModel = new DocumentsModel(documentNumber, documentDate,
-                            amount, customer);
-/*
-                    databaseConnector.addDocument(documentsModel);
-*/
-                    Toast.makeText(getActivity(), "Add Document Successfully", Toast.LENGTH_SHORT).show();
-                    binding.documentNumber.setText("");
-                    binding.documentAmount.setText("");
-                    binding.documentDate.setText("");
-                    binding.documentCustomer.setText("");
-
-                    getActivity().getSupportFragmentManager().beginTransaction()
-                            .detach(DocumentsFragment.this).attach(DocumentsFragment.this).commit();
-                }
+                String documentId = documentsRef.document().getId();
+                DocumentsModel document = new DocumentsModel(documentId, documentNumber, documentDate, amount, customer);
+                documentsRef.document(documentId).set(document);
+                Toast.makeText(getContext(), "Document Created Successfully!", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(), MainActivity.class);
+                startActivity(intent);
 
             }
         });

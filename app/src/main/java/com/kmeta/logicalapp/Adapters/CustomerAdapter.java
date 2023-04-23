@@ -45,7 +45,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
     public void onBindViewHolder(@NonNull CustomerAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         final CustomerModel customerModelClass = customerModels.get(position);
 
-        holder.textViewID.setText(Integer.toString(customerModelClass.getId()));
+        holder.textViewID.setText(customerModelClass.getId());
         holder.editText_firstName.setText(customerModelClass.getFirstName());
         holder.editText_lastName.setText(customerModelClass.getLastName());
         holder.editText_birthDate.setText(customerModelClass.getBirthDate());

@@ -1,7 +1,7 @@
 package com.kmeta.logicalapp.Models;
 
 public class CustomerModel {
-    private Integer id;
+    private String id;
     private String firstName;
     private String lastName;
     private String birthDate;
@@ -10,7 +10,7 @@ public class CustomerModel {
     private String longitude;
     private String isActive;
 
-    public CustomerModel(Integer id,
+    public CustomerModel(String id,
                          String firstName,
                          String lastName,
                          String birthDate,
@@ -27,6 +27,9 @@ public class CustomerModel {
         this.longitude = longitude;
         this.isActive = isActive;
     }
+    public CustomerModel() {
+
+    }
 
     public CustomerModel(String firstName,
                          String lastName,
@@ -42,7 +45,7 @@ public class CustomerModel {
         this.longitude = longitude;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
@@ -72,5 +75,37 @@ public class CustomerModel {
 
     public String getIsActive() {
         return isActive;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public void setIsActive(String isActive) {
+        this.isActive = isActive;
     }
 }

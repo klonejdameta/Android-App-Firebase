@@ -1,7 +1,6 @@
 package com.kmeta.logicalapp.Adapters;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -46,9 +45,9 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull UsersAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         final UsersModel usersModel = usersModels.get(position);
 
-        holder.textViewID.setText(Integer.toString(usersModel.getId()));
+        holder.textViewID.setText(usersModel.getId());
         holder.name.setText(usersModel.getName());
-        holder.userName.setText(usersModel.getUserName());
+        holder.userName.setText(usersModel.getUsername());
         holder.email.setText(usersModel.getEmail());
 
         holder.buttonEditUsers.setOnClickListener(new View.OnClickListener() {
