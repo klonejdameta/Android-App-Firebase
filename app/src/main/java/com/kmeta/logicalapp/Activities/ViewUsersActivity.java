@@ -11,10 +11,7 @@ import android.widget.Toast;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.kmeta.logicalapp.Adapters.DocumentsAdapter;
 import com.kmeta.logicalapp.Adapters.UsersAdapter;
-import com.kmeta.logicalapp.Database.DatabaseConnector;
-import com.kmeta.logicalapp.Models.DocumentsModel;
 import com.kmeta.logicalapp.Models.UsersModel;
 import com.kmeta.logicalapp.R;
 
