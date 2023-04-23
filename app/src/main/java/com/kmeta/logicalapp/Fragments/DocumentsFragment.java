@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,32 +27,14 @@ import java.util.Locale;
 
 public class DocumentsFragment extends Fragment {
     FragmentDocumentsBinding binding;
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-    private String mParam1;
-    private String mParam2;
     CollectionReference documentsRef;
 
     public DocumentsFragment() {
 
     }
-
-    public static DocumentsFragment newInstance(String param1, String param2) {
-        DocumentsFragment fragment = new DocumentsFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -82,7 +65,7 @@ public class DocumentsFragment extends Fragment {
 
             try {
                 Date date = sdf.parse(documentDate);
-
+                Log.d("DATE_VALIDATION", "The date is valid: " + date);
             } catch (ParseException e) {
 
                 Toast.makeText(getActivity(), "Please enter a valid document date (yyyy-mm-dd)", Toast.LENGTH_SHORT).show();

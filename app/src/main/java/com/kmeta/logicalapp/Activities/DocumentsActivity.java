@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -52,9 +53,8 @@ public class DocumentsActivity extends AppCompatActivity {
 
             try {
                 Date date = sdf.parse(document_date);
-                // Date is valid
+                Log.d("DATE_VALIDATION", "The date is valid: " + date);
             } catch (ParseException e) {
-                // Date is invalid
                 Toast.makeText(DocumentsActivity.this, "Please enter a valid document date (yyyy-mm-dd)", Toast.LENGTH_SHORT).show();
                 return;
             }

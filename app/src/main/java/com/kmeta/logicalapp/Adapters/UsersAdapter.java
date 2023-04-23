@@ -20,22 +20,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.kmeta.logicalapp.Database.DatabaseConnector;
 import com.kmeta.logicalapp.Models.UsersModel;
 import com.kmeta.logicalapp.R;
 
 import java.util.List;
 
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> {
-
     List<UsersModel> usersModels;
     Context context;
-    DatabaseConnector databaseConnector;
-
     public UsersAdapter(List<UsersModel> usersModels, Context context) {
         this.usersModels = usersModels;
         this.context = context;
-        databaseConnector = new DatabaseConnector(context);
     }
 
     @NonNull
@@ -68,7 +63,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
                     DocumentReference docRef = database.collection("users").document(usersModel.getId());
 
                     docRef.update("name", name,
-                                    "userName", userName,
+                                    "username", userName,
                                     "email", email)
                             .addOnSuccessListener(aVoid -> {
                                 notifyDataSetChanged();

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -21,7 +22,6 @@ import java.util.Date;
 import java.util.Locale;
 
 public class CustomersActivity extends AppCompatActivity {
-
     CollectionReference customersRef;
     ActivityCustomersBinding binding;
 
@@ -54,9 +54,8 @@ public class CustomersActivity extends AppCompatActivity {
 
             try {
                 Date date = sdf.parse(customerBirthDate);
-                // Date is valid
+                Log.d("DATE_VALIDATION", "The date is valid: " + date);
             } catch (ParseException e) {
-                // Date is invalid
                 Toast.makeText(CustomersActivity.this, "Please enter a valid birth date (yyyy-mm-dd)", Toast.LENGTH_SHORT).show();
                 return;
             }

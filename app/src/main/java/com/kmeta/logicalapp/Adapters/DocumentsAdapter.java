@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.kmeta.logicalapp.Database.DatabaseConnector;
 import com.kmeta.logicalapp.Models.DocumentsModel;
 import com.kmeta.logicalapp.R;
 
@@ -29,12 +28,9 @@ import java.util.Map;
 public class DocumentsAdapter extends RecyclerView.Adapter<DocumentsAdapter.ViewHolder> {
     List<DocumentsModel> documentsModels;
     Context context;
-    DatabaseConnector databaseConnector;
-
     public DocumentsAdapter(List<DocumentsModel> documentsModels, Context context) {
         this.documentsModels = documentsModels;
         this.context = context;
-        databaseConnector = new DatabaseConnector(context);
     }
 
     @NonNull

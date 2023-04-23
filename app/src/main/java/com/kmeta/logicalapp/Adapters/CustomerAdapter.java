@@ -6,7 +6,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,12 +17,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.kmeta.logicalapp.Models.CustomerModel;
-import com.kmeta.logicalapp.Database.DatabaseConnector;
 import com.kmeta.logicalapp.R;
 
 import java.util.HashMap;
@@ -33,12 +29,10 @@ import java.util.Map;
 public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHolder> {
     List<CustomerModel> customerModels;
     Context context;
-    DatabaseConnector databaseConnector;
 
     public CustomerAdapter(List<CustomerModel> customerModels, Context context) {
         this.customerModels = customerModels;
         this.context = context;
-        databaseConnector = new DatabaseConnector(context);
     }
 
     @NonNull
@@ -46,8 +40,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
     public CustomerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.customer_item_list, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
+        return new ViewHolder(view);
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -110,9 +103,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
                                     customerModels.remove(position);
                                     notifyDataSetChanged();
                                 })
-                                .addOnFailureListener(e -> {
-                                    Log.w(TAG, "Error deleting document", e);
-                                });
+                                .addOnFailureListener(e -> Log.w(TAG, "Error deleting document", e));
                     })
                     .setNegativeButton(android.R.string.no, null)
                     .setIcon(android.R.drawable.ic_dialog_alert)
@@ -126,7 +117,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
         return customerModels.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView textViewID;
         EditText editText_firstName, editText_lastName, editText_address, editText_birthDate,
                 editText_longitude, editText_latitude, editText_isActive;

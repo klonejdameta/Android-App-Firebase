@@ -8,7 +8,6 @@ import androidx.fragment.app.FragmentTransaction;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -25,27 +24,23 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.kmeta.logicalapp.Activities.CustomersActivity;
 import com.kmeta.logicalapp.Activities.DocumentsActivity;
 import com.kmeta.logicalapp.Activities.LoginActivity;
-import com.kmeta.logicalapp.Database.DatabaseConnector;
 import com.kmeta.logicalapp.Fragments.CustomersFragment;
 import com.kmeta.logicalapp.Fragments.DocumentsFragment;
 import com.kmeta.logicalapp.Fragments.HomeFragment;
 import com.kmeta.logicalapp.Fragments.MapFragment;
 import com.kmeta.logicalapp.databinding.ActivityMainBinding;
 
-
 public class MainActivity extends AppCompatActivity {
     FloatingActionButton floatingActionButton;
     BottomNavigationView bottomNavigationView;
-    DatabaseConnector databaseConnector;
     ActivityMainBinding binding;
 
-    @SuppressLint({"MissingInflatedId", "WrongViewCast"})
+    @SuppressLint({"MissingInflatedId", "WrongViewCast", "NonConstantResourceId"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        databaseConnector = new DatabaseConnector(this);
 
         CustomersFragment customersFragment = new CustomersFragment();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -81,12 +76,7 @@ public class MainActivity extends AppCompatActivity {
             return true;
         });
 
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showBottomDialog();
-            }
-        });
+        floatingActionButton.setOnClickListener(view -> showBottomDialog());
 
     }
 
@@ -98,21 +88,13 @@ public class MainActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(mainActivity);
         builder.setTitle("Logout");
         builder.setMessage("Are you sure you want to logout?");
-        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-                finish();
-            }
+        builder.setPositiveButton("Yes", (dialogInterface, i) -> {
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            finish();
         });
-        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.dismiss();
-            }
-        });
+        builder.setNegativeButton("No", (dialogInterface, i) -> dialogInterface.dismiss());
         builder.show();
     }
 
@@ -132,28 +114,21 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout customersLayout = dialog.findViewById(R.id.layoutCustomers);
         LinearLayout documentsLayout = dialog.findViewById(R.id.layoutDocuments);
 
-        customersLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        customersLayout.setOnClickListener(v -> {
 
-                dialog.dismiss();
-                Toast.makeText(MainActivity.this, "Create a customer is clicked", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(MainActivity.this, CustomersActivity.class);
-                startActivity(intent);
-            }
+            dialog.dismiss();
+            Toast.makeText(MainActivity.this, "Create a customer is clicked", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainActivity.this, CustomersActivity.class);
+            startActivity(intent);
         });
 
-        documentsLayout.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("WrongViewCast")
-            @Override
-            public void onClick(View v) {
+        documentsLayout.setOnClickListener(v -> {
 
-                dialog.dismiss();
-                Toast.makeText(MainActivity.this, "Create a document is Clicked", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(MainActivity.this, DocumentsActivity.class);
-                startActivity(intent);
+            dialog.dismiss();
+            Toast.makeText(MainActivity.this, "Create a document is Clicked", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainActivity.this, DocumentsActivity.class);
+            startActivity(intent);
 
-            }
         });
 
         dialog.show();
